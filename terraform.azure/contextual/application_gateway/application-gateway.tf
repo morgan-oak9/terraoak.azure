@@ -52,7 +52,7 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
     port = 443
   }
 
-  # Required
+  
   frontend_ip_configuration {
     name                 = "test"
     private_ip_address = "test"
@@ -61,14 +61,14 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
     subnet_id = "4321"
   }
   
-  # Required
+  
   backend_address_pool {
     name = "test"
     fqdns = ["test"]
     ip_addresses = ["test"]
   }
 
-  # Required
+  
   backend_http_settings {
     name                  = "test"
     cookie_based_affinity = "Enabled"
@@ -122,7 +122,7 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
     port                           = 445
   }
 
-  # Required
+  
   request_routing_rule {
     name                       = local.request_routing_rule_name
     rule_type                  = "Basic"

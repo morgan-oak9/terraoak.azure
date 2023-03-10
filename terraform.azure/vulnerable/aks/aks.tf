@@ -52,7 +52,6 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 
 
 resource "azurerm_kubernetes_cluster_node_pool" "aks_cluster_node_pool" {
-  # All options # Must be configured
   name                  = "aks-demo-cluster-node-pool"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks_cluster.id
   vm_size               = "Standard_DS2_v2"
