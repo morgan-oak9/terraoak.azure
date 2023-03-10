@@ -1,2 +1,4 @@
-# TerraOak-Azure
-TerraOak is Oak9's vulnerable IAC code repo for Azure. This repo will be used for learning and training purposes on how to implement a cloud security posture for Azure.
+# TerraOak - Finding Design Gaps Daily
+![TerraOak](oak9-logo.png)
+
+TerraOak is [oak9](https://oak9.io)'s vulnerable Infrastructure as Code repository. This repo is for learning and training purposes to demonstrate how to implement a cloud security posture. 
