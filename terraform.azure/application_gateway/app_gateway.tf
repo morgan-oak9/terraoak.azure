@@ -1,87 +1,78 @@
 resource "azurerm_resource_group" "app_gateway_resource_group" {
-  name     = "demo-resource-group"
-  location = "West Europe"
+  name     = "sac-app-gateway-group"
+  location = "East US 2"
 }
 
-resource "azurerm_application_gateway" "application_gateway" {
-  name                = "demo-application-gateway"
+resource "azurerm_application_gateway" "sac_application_gateway" {
+  name                = "sac-application-gateway"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
   location            = azurerm_resource_group.app_gateway_resource_group.location
-  fips_enabled = false
   
-  sku {
-    name     = "Standard_Small"
-    tier     = "Standard"
-    capacity = 2
+  identity {
+    type = "UserAssigned"
+    identity_ids = [azurerm_user_assigned_identity.app_gateway_identity.id]
   }
 
-  autoscale_configuration {
-    min_capacity = 0
-    max_capacity = 0
+  fips_enabled = false
+
+  sku {
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
+    capacity = 1
   }
 
   waf_configuration {
-   enabled = true
-   file_upload_limit_mb = 0
+   enabled = false
+   file_upload_limit_mb = 200
    request_body_check = false
-   max_request_body_size_kb = 0
-   firewall_mode = "DETECTION"
-   rule_set_version = "0.1"
+   max_request_body_size_kb = 10
+   firewall_mode = "Detection"
+   rule_set_version = "3.0"
 
-  }
-
-  frontend_port {
-    name = "redirect-port"
-    port = 447
-  }
-
-  frontend_port {
-    name = "http-port"
-    port = 447
   }
 
   frontend_ip_configuration {
     name                 = "frontend-ip-config"
     public_ip_address_id = azurerm_public_ip.app_gateway_ip_config.id
   }
-  
-  backend_address_pool {
-    name = "backend-address-pool"
-    ip_addresses = [azurerm_public_ip.app_gateway_ip_config.id]
+
+  gateway_ip_configuration {
+    name = "sac-testing-gateway-config"
+    subnet_id = azurerm_subnet.app_gateway_subnet.id
   }
 
   backend_http_settings {
     name                  = "backend-http-settings"
     cookie_based_affinity = "Disabled"
     port                  = 63
-    protocol              = "http"
-    request_timeout       = 0
+    protocol              = "Http"
+    request_timeout       = 20000
     
     connection_draining {
       enabled = false
-      drain_timeout_sec = 4000
-    }
-
-    trusted_root_certificate{
-      name = "trusted-root-certificate"
-      data = "test-data"
+      drain_timeout_sec = 2000
     }
   }
 
   http_listener {
     name                           = "http-listener-1"
-    frontend_ip_configuration_name = "ip_config_1"
-    frontend_port_name             = "front_end_port_1"
-    protocol                       = "HTTP"
-    port                           = 443
+    frontend_ip_configuration_name = "frontend-ip-config"
+    frontend_port_name             = "redirect-port"
+    protocol                       = "Https"
   }
 
-  http_listener {
-    name                           = "http-listener-2"
-    frontend_ip_configuration_name = "ip_config_2"
-    frontend_port_name             = "front_end_port_2"
-    protocol                       = "HTTP"
-    port                           = 445
+  ssl_policy {
+    policy_type = "Custom"
+    min_protocol_version = "TLSv1_1"
+  }
+
+  ssl_certificate {
+    name = "demo-ssl-certificate"
+  }
+
+  frontend_port {
+    name = "redirect-port"
+    port = 447
   }
 
   request_routing_rule {
@@ -90,25 +81,11 @@ resource "azurerm_application_gateway" "application_gateway" {
     http_listener_name         = "http-listener-1"
     backend_address_pool_name  = "backend-address-pool"
     backend_http_settings_name = "backend-http-settings"
-    priority = 0
+    priority = 100
   }
-
-  probe {
-    name = "demo-test-probe"
-    interval = 0
-    protocol = "http"
-    pick_host_name_from_backend_http_settings = false
-  }
-
-  ssl_policy {
-    policy_type = "default"
-    cipher_suites = ["AES-256"]
-    min_protocol_version = "tlsv1_1"
-    disabled_protocols = ["TLSv1_2"]
-  }
-
-  ssl_certificate {
-    name = "demo-ssl-certificate"
+  
+  backend_address_pool {
+    name = "backend-address-pool"
   }
 }
 
@@ -118,5 +95,28 @@ resource "azurerm_public_ip" "app_gateway_ip_config" {
   location            = azurerm_resource_group.app_gateway_resource_group.location
   allocation_method   = "Static"
   sku                 = "Standard"
-  zones               = ["us-east-1", "us-west-1", "us-west-2"]
+  zones               = ["2"]
+}
+
+resource "azurerm_user_assigned_identity" "app_gateway_identity" {
+  location            = azurerm_resource_group.app_gateway_resource_group.location
+  name                = "sac-app-gw-identity"
+  resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
+}
+
+data "azurerm_client_config" "current" {
+}
+
+resource "azurerm_subnet" "app_gateway_subnet" {
+  name                 = "sac-app-gateway-subnet"
+  resource_group_name  = azurerm_resource_group.app_gateway_resource_group.name
+  virtual_network_name = azurerm_virtual_network.app_gateway_virtual_network.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+resource "azurerm_virtual_network" "app_gateway_virtual_network" {
+  name                = "sac-app-gw-virtual-network"
+  location            = azurerm_resource_group.app_gateway_resource_group.location
+  resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
+  address_space       = ["10.0.0.0/16"]
 }
