@@ -45,7 +45,7 @@ resource "azurerm_key_vault_secret" "sac_key_vault_secret" {
 
 resource "azurerm_role_definition" "sac_keyvault_role" {
   name        = "sac-keyvault-create-key-secret-role"
-  scope       = "/subscriptions/26e3ffed-afcb-4f7a-a34c-d7905542e0c4/resourceGroups/sac-key-vault-group"  # KeyVault Resource Group
+  scope       = "/subscriptions/26e3ffed-afcb-4f7a-a34c-d7905542e0c4/resourceGroups/sac-key-vault-group"
   description = "This is a custom role created via Terraform"
 
   permissions {
