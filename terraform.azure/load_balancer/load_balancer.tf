@@ -21,10 +21,3 @@ resource "azurerm_lb" "load_balancer" {
     sku_name = "basic"
   }
 }
-
-resource "azurerm_lb_probe" "probe" {
-  loadbalancer_id = azurerm_lb.load_balancer.id
-  name            = "demo-load-balancer-probe"
-  port            = 22
-  protocol = "http"
-}
