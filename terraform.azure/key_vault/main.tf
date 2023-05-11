@@ -3,8 +3,9 @@ resource "azurerm_resource_group" "sac_key_vault_group" {
   location = "East US 2"
 }
 
-data "azurerm_client_config" "current" {}
-
+# ---------------------------------------------------------------------
+# KeyVault
+# ---------------------------------------------------------------------
 resource "azurerm_key_vault" "sac_key_vault" {
   name                              = "sac-key-vault"
   location                          = azurerm_resource_group.sac_key_vault_group.location
@@ -30,6 +31,9 @@ resource "azurerm_key_vault" "sac_key_vault" {
   }
 }
 
+data "azurerm_client_config" "current" {}
+
+
 resource "azurerm_key_vault_key" "sac_key_vault_key" {
   name              = "sac-key-vault-key"
   key_vault_id      = azurerm_key_vault.sac_key_vault.id
@@ -43,6 +47,9 @@ resource "azurerm_key_vault_secret" "sac_key_vault_secret" {
   key_vault_id = azurerm_key_vault.sac_key_vault.id
 }
 
+# ---------------------------------------------------------------------
+# Role
+# ---------------------------------------------------------------------
 resource "azurerm_role_definition" "sac_keyvault_role" {
   name        = "sac-keyvault-create-key-secret-role"
   scope       = "/subscriptions/26e3ffed-afcb-4f7a-a34c-d7905542e0c4/resourceGroups/sac-key-vault-group"

@@ -1,11 +1,11 @@
-resource "azurerm_public_ip" "traffic_manager_ip" {
-  name                = "sac-traffic-manager-public-ip"
-  location            = azurerm_resource_group.sac_traffic_manager_group.location
-  resource_group_name = azurerm_resource_group.sac_traffic_manager_group.name
-  allocation_method   = "Static"
-  domain_name_label   = "sac-traffic-manager-public-ip"
+resource "azurerm_resource_group" "sac_traffic_manager_group" {
+  name     = "sac-traffic-resource-group"
+  location = "East US"
 }
 
+# ---------------------------------------------------------------------
+# Traffic Manager
+# ---------------------------------------------------------------------
 resource "azurerm_traffic_manager_azure_endpoint" "azure_endpoint" {
   name               = "sac-azure-endpoint"
   profile_id         = azurerm_traffic_manager_profile.sac_traffic_manager_profiles.id
@@ -25,6 +25,16 @@ resource "azurerm_traffic_manager_nested_endpoint" "nested_endpoint" {
   minimum_child_endpoints = 2
 }
 
+resource "azurerm_traffic_manager_profile" "sac_traffic_manager_profiles" {
+  name                   = "sac-testing-traffic-manager"
+  resource_group_name    = azurerm_resource_group.sac_traffic_manager_group.name
+  traffic_routing_method = "Geographic"
+  traffic_view_enabled = false
+}
+
+# ---------------------------------------------------------------------
+# Service Plan
+# ---------------------------------------------------------------------
 resource "azurerm_service_plan" "nested_plan" {
   name                = "sac-app-service-plan"
   resource_group_name = azurerm_resource_group.sac_traffic_manager_group.name
@@ -40,4 +50,15 @@ resource "azurerm_linux_web_app" "app_service" {
   service_plan_id     = azurerm_service_plan.nested_plan.id
 
   site_config {}
+}
+
+# ---------------------------------------------------------------------
+# Network
+# ---------------------------------------------------------------------
+resource "azurerm_public_ip" "traffic_manager_ip" {
+  name                = "sac-traffic-manager-public-ip"
+  location            = azurerm_resource_group.sac_traffic_manager_group.location
+  resource_group_name = azurerm_resource_group.sac_traffic_manager_group.name
+  allocation_method   = "Static"
+  domain_name_label   = "sac-traffic-manager-public-ip"
 }
