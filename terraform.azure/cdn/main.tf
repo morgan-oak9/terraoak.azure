@@ -3,6 +3,9 @@ resource "azurerm_resource_group" "cdn_resource_group" {
   location = "East US 2"
 }
 
+# ---------------------------------------------------------------------
+# CDN
+# ---------------------------------------------------------------------
 resource "azurerm_cdn_profile" "sac_cdn_profile" {
   name                = "sac-testing-cdn-profile"
   location            = azurerm_resource_group.cdn_resource_group.location

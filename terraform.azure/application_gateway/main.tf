@@ -3,6 +3,9 @@ resource "azurerm_resource_group" "app_gateway_resource_group" {
   location = "East US 2"
 }
 
+# ---------------------------------------------------------------------
+# Application Gateway
+# ---------------------------------------------------------------------
 resource "azurerm_application_gateway" "sac_application_gateway" {
   name                = "sac-application-gateway"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
@@ -89,6 +92,21 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
   }
 }
 
+# ---------------------------------------------------------------------
+# Managed Identity
+# ---------------------------------------------------------------------
+data "azurerm_client_config" "current" {
+}
+ 
+resource "azurerm_user_assigned_identity" "app_gateway_identity" {
+  location            = azurerm_resource_group.app_gateway_resource_group.location
+  name                = "sac-app-gw-identity"
+  resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
+}
+
+# ---------------------------------------------------------------------
+# Network
+# ---------------------------------------------------------------------
 resource "azurerm_public_ip" "app_gateway_ip_config" {
   name                = "demo-app-gateway-ipconfig"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
@@ -96,15 +114,6 @@ resource "azurerm_public_ip" "app_gateway_ip_config" {
   allocation_method   = "Static"
   sku                 = "Standard"
   zones               = ["2"]
-}
-
-resource "azurerm_user_assigned_identity" "app_gateway_identity" {
-  location            = azurerm_resource_group.app_gateway_resource_group.location
-  name                = "sac-app-gw-identity"
-  resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
-}
-
-data "azurerm_client_config" "current" {
 }
 
 resource "azurerm_subnet" "app_gateway_subnet" {
