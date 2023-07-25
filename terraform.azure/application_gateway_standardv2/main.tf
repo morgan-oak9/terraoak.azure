@@ -64,7 +64,7 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
     frontend_ip_configuration_name = "frontend-ip-config"
     frontend_port_name             = "redirect-port"
     # SaC Testing - Severity: Critical - Set protocol != https
-    protocol                       = "Http"
+    protocol                       = "Https"
   }
 
   ssl_policy {
