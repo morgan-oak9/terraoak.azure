@@ -4,7 +4,7 @@
 # Application Gateway
 # ---------------------------------------------------------------------
 resource "azurerm_application_gateway" "sac_application_gateway_standardv2_predefined" {
-  name                = "sac-application-gateway"
+  name                = "sac-application-gateway-standardv2"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
   location            = azurerm_resource_group.app_gateway_resource_group.location
   
