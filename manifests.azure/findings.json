@@ -1,0 +1,913 @@
+[
+    {
+        "requirementId": "Oak9.CR.AE.2",
+        "requirementName": "Access Enforcement",
+        "source": "Kubernetes",
+        "resourceName": "sac-k8-stateful-set",
+        "resourceId": "Kubernetes_Namespaced-33a809bc-dedd-d36e-d835-0597c493a20b",
+        "resourceType": "Kubernetes_Namespaced",
+        "oak9Guidance": "Enforce the access control policy and ensure minimum necessary access",
+        "reqGap": "sac-k8-stateful-set is not configured to appropriately enforce the access control policy",
+        "reqImpact": "Unauthorized access could be possible",
+        "mappedIndustryFrameworks": [
+            {
+                "industryStd": "NIST.800-53.R4",
+                "displayName": "NIST 800-53 R4",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "HITRUST.BUID",
+                "displayName": "HITRUST",
+                "desc": "HITRUST CSF is a healthcare focused security and privacy framework that rationalizes relevant regulations and standards into a single overarching framework."
+            },
+            {
+                "industryStd": "PCI.DSS",
+                "displayName": "PCI DSS",
+                "desc": "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle branded credit cards from the major card providers. The standard was created to increase controls around cardholder data to reduce credit card fraud."
+            },
+            {
+                "industryStd": "EU.GDPR",
+                "displayName": "GDPR",
+                "desc": "EU data privacy and protection regulation covering collection, storage, processing, and transfer of personal data with entities that work with European Clients."
+            },
+            {
+                "industryStd": "HIPAA",
+                "displayName": "HIPAA",
+                "desc": "HIPAA / HITECH are US regulations for protection of healthcare information."
+            },
+            {
+                "industryStd": "ISO27001",
+                "displayName": "ISO 27001",
+                "desc": "ISO 27001 is a widely used international standard that organizations use to manage the security of their information assets."
+            },
+            {
+                "industryStd": "1TAC",
+                "displayName": "1 TAC",
+                "desc": "1TAC deals with rules set from state agencies in Texas, separated into several titles for each agency dealt within the framework."
+            },
+            {
+                "industryStd": "201CMR17",
+                "displayName": "201 CMR.17",
+                "desc": "Massachusetts state regulation establishing minimum standards to be met in connection with the safeguarding of residents\u2019 personal information."
+            },
+            {
+                "industryStd": "23NYCRR",
+                "displayName": "23 NYCRR",
+                "desc": "New York state regulation that establishes cybersecurity requirements for financial services companies."
+            },
+            {
+                "industryStd": "NRS603A",
+                "displayName": "NRS 603A",
+                "desc": "Nevada state regulation to protect personal information of residents."
+            },
+            {
+                "industryStd": "CSA.CCM",
+                "displayName": "CSA CCM",
+                "desc": "Cloud Control Matrix is a cloud focused control framework that provides guidance for security and privacy."
+            },
+            {
+                "industryStd": "SCIDSA",
+                "displayName": "SCIDSA",
+                "desc": "South Carolina state regulation that protects insurance data."
+            },
+            {
+                "industryStd": "NIST.CSF",
+                "displayName": "NIST CSF",
+                "desc": "One of the most widely used security and privacy control frameworks published by NIST (US)"
+            },
+            {
+                "industryStd": "FCA",
+                "displayName": "FCA",
+                "desc": "Financial Conduct Authority\u2019s Handbook of rules and guidance"
+            },
+            {
+                "industryStd": "AWS.FTR",
+                "displayName": "AWS FTR",
+                "desc": "The AWS Foundational Technical Review (FTR) is an AWS requirement to become an AWS partner.  It is broad framework that ensures that you are following security best practices within AWS."
+            },
+            {
+                "industryStd": "Azure_Benchmarks",
+                "displayName": "Azure Benchmarks",
+                "desc": "The Azure Security Benchmark focuses on cloud-centric control areas"
+            },
+            {
+                "industryStd": "Soc_2",
+                "displayName": "SOC 2",
+                "desc": "SOC 2 assists in measuring your internal policies against industry standards for securing and protecting data."
+            },
+            {
+                "industryStd": "NIST.800-53.R5",
+                "displayName": "NIST 800-53 R5",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "Mitre_att&ck",
+                "displayName": "MITRE ATT&CK",
+                "desc": "MITRE ATT&CK s a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations."
+            },
+            {
+                "industryStd": "Cis_Controls_v8",
+                "displayName": "CIS Controls v8",
+                "desc": "CIS Controls v8 is a framework that provides security controls that organizations should follow to detect & mitigate cyber-attacks."
+            }
+        ],
+        "violations": [
+            {
+                "requirementId": "Oak9.CR.AE.2",
+                "requirementName": "Access Enforcement",
+                "attributeKey": "roleBinding[0].RoleRef",
+                "attributeValue": "api_group: \"rbac.authorization.k8s.io\"\nkind: \"ClusterRole\"\nname: \"cluster-admin\"\n",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Avoid granting \"cluster-admin\" default role to non-admin users or service accounts",
+                "configGap": "Avoid granting \"cluster-admin\" default role to non-admin users or service accounts",
+                "configImpact": "",
+                "configFix": "Ensure that roleBinding[0].RoleRef doesn't grant default \"cluster-admin\" role to non-admin users or service accounts. If an User or Service Account requires control plane access, it is recommended to create a role with limited permissions to necessary resources",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            }
+        ]
+    },
+    {
+        "requirementId": "Oak9.CR.CM.1",
+        "requirementName": "Hardening",
+        "source": "Kubernetes",
+        "resourceName": "sac-k8-stateful-set",
+        "resourceId": "Kubernetes_Namespaced-33a809bc-dedd-d36e-d835-0597c493a20b",
+        "resourceType": "Kubernetes_Namespaced",
+        "oak9Guidance": "Harden the configuration of the component to minimize the attack surface",
+        "reqGap": "sac-k8-stateful-set is not setup with a hardened configuration",
+        "reqImpact": "This increases the attack surface of this component and can introduce flaws that can be exploited",
+        "mappedIndustryFrameworks": [
+            {
+                "industryStd": "NIST.800-53.R4",
+                "displayName": "NIST 800-53 R4",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "HITRUST.BUID",
+                "displayName": "HITRUST",
+                "desc": "HITRUST CSF is a healthcare focused security and privacy framework that rationalizes relevant regulations and standards into a single overarching framework."
+            },
+            {
+                "industryStd": "PCI.DSS",
+                "displayName": "PCI DSS",
+                "desc": "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle branded credit cards from the major card providers. The standard was created to increase controls around cardholder data to reduce credit card fraud."
+            },
+            {
+                "industryStd": "EU.GDPR",
+                "displayName": "GDPR",
+                "desc": "EU data privacy and protection regulation covering collection, storage, processing, and transfer of personal data with entities that work with European Clients."
+            },
+            {
+                "industryStd": "HIPAA",
+                "displayName": "HIPAA",
+                "desc": "HIPAA / HITECH are US regulations for protection of healthcare information."
+            },
+            {
+                "industryStd": "ISO27001",
+                "displayName": "ISO 27001",
+                "desc": "ISO 27001 is a widely used international standard that organizations use to manage the security of their information assets."
+            },
+            {
+                "industryStd": "1TAC",
+                "displayName": "1 TAC",
+                "desc": "1TAC deals with rules set from state agencies in Texas, separated into several titles for each agency dealt within the framework."
+            },
+            {
+                "industryStd": "201CMR17",
+                "displayName": "201 CMR.17",
+                "desc": "Massachusetts state regulation establishing minimum standards to be met in connection with the safeguarding of residents\u2019 personal information."
+            },
+            {
+                "industryStd": "23NYCRR",
+                "displayName": "23 NYCRR",
+                "desc": "New York state regulation that establishes cybersecurity requirements for financial services companies."
+            },
+            {
+                "industryStd": "NRS603A",
+                "displayName": "NRS 603A",
+                "desc": "Nevada state regulation to protect personal information of residents."
+            },
+            {
+                "industryStd": "CSA.CCM",
+                "displayName": "CSA CCM",
+                "desc": "Cloud Control Matrix is a cloud focused control framework that provides guidance for security and privacy."
+            },
+            {
+                "industryStd": "SCIDSA",
+                "displayName": "SCIDSA",
+                "desc": "South Carolina state regulation that protects insurance data."
+            },
+            {
+                "industryStd": "NIST.CSF",
+                "displayName": "NIST CSF",
+                "desc": "One of the most widely used security and privacy control frameworks published by NIST (US)"
+            },
+            {
+                "industryStd": "FCA",
+                "displayName": "FCA",
+                "desc": "Financial Conduct Authority\u2019s Handbook of rules and guidance"
+            },
+            {
+                "industryStd": "AWS.FTR",
+                "displayName": "AWS FTR",
+                "desc": "The AWS Foundational Technical Review (FTR) is an AWS requirement to become an AWS partner.  It is broad framework that ensures that you are following security best practices within AWS."
+            },
+            {
+                "industryStd": "Azure_Benchmarks",
+                "displayName": "Azure Benchmarks",
+                "desc": "The Azure Security Benchmark focuses on cloud-centric control areas"
+            },
+            {
+                "industryStd": "Soc_2",
+                "displayName": "SOC 2",
+                "desc": "SOC 2 assists in measuring your internal policies against industry standards for securing and protecting data."
+            },
+            {
+                "industryStd": "NIST.800-53.R5",
+                "displayName": "NIST 800-53 R5",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "Mitre_att&ck",
+                "displayName": "MITRE ATT&CK",
+                "desc": "MITRE ATT&CK s a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations."
+            },
+            {
+                "industryStd": "Cis_Controls_v8",
+                "displayName": "CIS Controls v8",
+                "desc": "CIS Controls v8 is a framework that provides security controls that organizations should follow to detect & mitigate cyber-attacks."
+            }
+        ],
+        "violations": [
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable automatic volume mount of Service Account token in Containers",
+                "configGap": "Disable automatic volume mount of Service Account token in Containers",
+                "configImpact": "",
+                "configFix": "Set statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken to False to prevent automatic creation of Service Account token volume mount. By default, every pod is created with a default Service Account. API credentials required by this Service Account are mounted in the containers by default, allowing pods to communicate with the Kubernetes API server. Disabling statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken would prevent accidental access to the Service Account's API credentials",
+                "severity": "Moderate",
+                "oak9Severity": "Moderate",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable automatic volume mount of Service Account token in Containers",
+                "configGap": "Disable automatic volume mount of Service Account token in Containers",
+                "configImpact": "",
+                "configFix": "Set statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken to False to prevent automatic creation of Service Account token volume mount. By default, every pod is created with a default Service Account. API credentials required by this Service Account are mounted in the containers by default, allowing pods to communicate with the Kubernetes API server. Disabling statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken would prevent accidental access to the Service Account's API credentials",
+                "severity": "Moderate",
+                "oak9Severity": "Moderate",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable automatic volume mount of Service Account token in Containers",
+                "configGap": "Disable automatic volume mount of Service Account token in Containers",
+                "configImpact": "",
+                "configFix": "Set statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken to False to prevent automatic creation of Service Account token volume mount. By default, every pod is created with a default Service Account. API credentials required by this Service Account are mounted in the containers by default, allowing pods to communicate with the Kubernetes API server. Disabling statefulSet[0].Spec.Template.Spec.AutomountServiceAccountToken would prevent accidental access to the Service Account's API credentials",
+                "severity": "Moderate",
+                "oak9Severity": "Moderate",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "deployment[0].Spec.Template.Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable privilege escalation in Containers",
+                "configGap": "Disable privilege escalation in Containers",
+                "configImpact": "",
+                "configFix": "Set deployment[0].Spec.Template.Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation to False to prevent processes running in Containers from gaining more privileges than necessary",
+                "severity": "Critical",
+                "oak9Severity": "Critical",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "pod[0].Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable privilege escalation in Containers",
+                "configGap": "Disable privilege escalation in Containers",
+                "configImpact": "",
+                "configFix": "Set pod[0].Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation to False to prevent processes running in Containers from gaining more privileges than necessary",
+                "severity": "Critical",
+                "oak9Severity": "Critical",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "replicaSet[0].Spec.Template.Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable privilege escalation in Containers",
+                "configGap": "Disable privilege escalation in Containers",
+                "configImpact": "",
+                "configFix": "Set replicaSet[0].Spec.Template.Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation to False to prevent processes running in Containers from gaining more privileges than necessary",
+                "severity": "Critical",
+                "oak9Severity": "Critical",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "deployment[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem",
+                "attributeValue": "False",
+                "isVariable": false,
+                "oak9RecommendedValue": "True",
+                "errorMessage": "Enable Read-Only file system in Containers",
+                "configGap": "Enable Read-Only file system in Containers",
+                "configImpact": "",
+                "configFix": "Set deployment[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem to True to mount the Container's root file system as read-only",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "pod[0].Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem",
+                "attributeValue": "False",
+                "isVariable": false,
+                "oak9RecommendedValue": "True",
+                "errorMessage": "Enable Read-Only file system in Containers",
+                "configGap": "Enable Read-Only file system in Containers",
+                "configImpact": "",
+                "configFix": "Set pod[0].Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem to True to mount the Container's root file system as read-only",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "replicaSet[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem",
+                "attributeValue": "False",
+                "isVariable": false,
+                "oak9RecommendedValue": "True",
+                "errorMessage": "Enable Read-Only file system in Containers",
+                "configGap": "Enable Read-Only file system in Containers",
+                "configImpact": "",
+                "configFix": "Set replicaSet[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem to True to mount the Container's root file system as read-only",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "statefulSet[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem",
+                "attributeValue": "False",
+                "isVariable": false,
+                "oak9RecommendedValue": "True",
+                "errorMessage": "Enable Read-Only file system in Containers",
+                "configGap": "Enable Read-Only file system in Containers",
+                "configImpact": "",
+                "configFix": "Set statefulSet[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem to True to mount the Container's root file system as read-only",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            }
+        ]
+    },
+    {
+        "requirementId": "Oak9.CR.BR.1",
+        "requirementName": "High Availability",
+        "source": "Kubernetes",
+        "resourceName": "sac-k8-stateful-set",
+        "resourceId": "Kubernetes_Namespaced-33a809bc-dedd-d36e-d835-0597c493a20b",
+        "resourceType": "Kubernetes_Namespaced",
+        "oak9Guidance": "Design a highly available architecture that ensures the availability of essential business functions in accordance with organizational policies and standards",
+        "reqGap": "sac-k8-stateful-set has not been designed for high availability",
+        "reqImpact": "Unexpected resource failure could lead to unanticipated downtime",
+        "mappedIndustryFrameworks": [
+            {
+                "industryStd": "NIST.800-53.R4",
+                "displayName": "NIST 800-53 R4",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "HITRUST.BUID",
+                "displayName": "HITRUST",
+                "desc": "HITRUST CSF is a healthcare focused security and privacy framework that rationalizes relevant regulations and standards into a single overarching framework."
+            },
+            {
+                "industryStd": "PCI.DSS",
+                "displayName": "PCI DSS",
+                "desc": "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle branded credit cards from the major card providers. The standard was created to increase controls around cardholder data to reduce credit card fraud."
+            },
+            {
+                "industryStd": "EU.GDPR",
+                "displayName": "GDPR",
+                "desc": "EU data privacy and protection regulation covering collection, storage, processing, and transfer of personal data with entities that work with European Clients."
+            },
+            {
+                "industryStd": "HIPAA",
+                "displayName": "HIPAA",
+                "desc": "HIPAA / HITECH are US regulations for protection of healthcare information."
+            },
+            {
+                "industryStd": "ISO27001",
+                "displayName": "ISO 27001",
+                "desc": "ISO 27001 is a widely used international standard that organizations use to manage the security of their information assets."
+            },
+            {
+                "industryStd": "1TAC",
+                "displayName": "1 TAC",
+                "desc": "1TAC deals with rules set from state agencies in Texas, separated into several titles for each agency dealt within the framework."
+            },
+            {
+                "industryStd": "201CMR17",
+                "displayName": "201 CMR.17",
+                "desc": "Massachusetts state regulation establishing minimum standards to be met in connection with the safeguarding of residents\u2019 personal information."
+            },
+            {
+                "industryStd": "23NYCRR",
+                "displayName": "23 NYCRR",
+                "desc": "New York state regulation that establishes cybersecurity requirements for financial services companies."
+            },
+            {
+                "industryStd": "NRS603A",
+                "displayName": "NRS 603A",
+                "desc": "Nevada state regulation to protect personal information of residents."
+            },
+            {
+                "industryStd": "CSA.CCM",
+                "displayName": "CSA CCM",
+                "desc": "Cloud Control Matrix is a cloud focused control framework that provides guidance for security and privacy."
+            },
+            {
+                "industryStd": "SCIDSA",
+                "displayName": "SCIDSA",
+                "desc": "South Carolina state regulation that protects insurance data."
+            },
+            {
+                "industryStd": "NIST.CSF",
+                "displayName": "NIST CSF",
+                "desc": "One of the most widely used security and privacy control frameworks published by NIST (US)"
+            },
+            {
+                "industryStd": "FCA",
+                "displayName": "FCA",
+                "desc": "Financial Conduct Authority\u2019s Handbook of rules and guidance"
+            },
+            {
+                "industryStd": "AWS.FTR",
+                "displayName": "AWS FTR",
+                "desc": "The AWS Foundational Technical Review (FTR) is an AWS requirement to become an AWS partner.  It is broad framework that ensures that you are following security best practices within AWS."
+            },
+            {
+                "industryStd": "Azure_Benchmarks",
+                "displayName": "Azure Benchmarks",
+                "desc": "The Azure Security Benchmark focuses on cloud-centric control areas"
+            },
+            {
+                "industryStd": "Soc_2",
+                "displayName": "SOC 2",
+                "desc": "SOC 2 assists in measuring your internal policies against industry standards for securing and protecting data."
+            },
+            {
+                "industryStd": "NIST.800-53.R5",
+                "displayName": "NIST 800-53 R5",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "Mitre_att&ck",
+                "displayName": "MITRE ATT&CK",
+                "desc": "MITRE ATT&CK s a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations."
+            },
+            {
+                "industryStd": "Cis_Controls_v8",
+                "displayName": "CIS Controls v8",
+                "desc": "CIS Controls v8 is a framework that provides security controls that organizations should follow to detect & mitigate cyber-attacks."
+            }
+        ],
+        "violations": [
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "horizontalPodAutoscaler",
+                "attributeValue": "[]",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Horizontal Auto Scaling for Kubernetes Pods",
+                "configGap": "Define Horizontal Auto Scaling for Kubernetes Pods",
+                "configImpact": "",
+                "configFix": "Ensure that horizontalPodAutoscaler is defined to automatically deploy new pods based on demand",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "deployment[0].Spec.Template.Spec.Containers[0].LivenessProbe",
+                "attributeValue": "",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Liveness Probes for Containers",
+                "configGap": "Define Liveness Probes for Containers",
+                "configImpact": "",
+                "configFix": "Ensure that deployment[0].Spec.Template.Spec.Containers[0].LivenessProbe is defined to restart the Containers during unexpected failures",
+                "severity": "Low",
+                "oak9Severity": "Low",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "pod[0].Spec.Containers[0].LivenessProbe",
+                "attributeValue": "",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Liveness Probes for Containers",
+                "configGap": "Define Liveness Probes for Containers",
+                "configImpact": "",
+                "configFix": "Ensure that pod[0].Spec.Containers[0].LivenessProbe is defined to restart the Containers during unexpected failures",
+                "severity": "Low",
+                "oak9Severity": "Low",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "replicaSet[0].Spec.Template.Spec.Containers[0].LivenessProbe",
+                "attributeValue": "",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Liveness Probes for Containers",
+                "configGap": "Define Liveness Probes for Containers",
+                "configImpact": "",
+                "configFix": "Ensure that replicaSet[0].Spec.Template.Spec.Containers[0].LivenessProbe is defined to restart the Containers during unexpected failures",
+                "severity": "Low",
+                "oak9Severity": "Low",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "statefulSet[0].Spec.Template.Spec.Containers[0].LivenessProbe",
+                "attributeValue": "",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Liveness Probes for Containers",
+                "configGap": "Define Liveness Probes for Containers",
+                "configImpact": "",
+                "configFix": "Ensure that statefulSet[0].Spec.Template.Spec.Containers[0].LivenessProbe is defined to restart the Containers during unexpected failures",
+                "severity": "Low",
+                "oak9Severity": "Low",
+                "documentation": "",
+                "childViolations": []
+            }
+        ]
+    },
+    {
+        "requirementId": "Oak9.CR.CM.1",
+        "requirementName": "Hardening",
+        "source": "Kubernetes",
+        "resourceName": "sac-k8-daemon-set",
+        "resourceId": "Kubernetes_Namespaced-bbada15c-6d90-648c-f36d-0b1cc3e22e98",
+        "resourceType": "Kubernetes_Namespaced",
+        "oak9Guidance": "Harden the configuration of the component to minimize the attack surface",
+        "reqGap": "sac-k8-daemon-set is not setup with a hardened configuration",
+        "reqImpact": "This increases the attack surface of this component and can introduce flaws that can be exploited",
+        "mappedIndustryFrameworks": [
+            {
+                "industryStd": "NIST.800-53.R4",
+                "displayName": "NIST 800-53 R4",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "HITRUST.BUID",
+                "displayName": "HITRUST",
+                "desc": "HITRUST CSF is a healthcare focused security and privacy framework that rationalizes relevant regulations and standards into a single overarching framework."
+            },
+            {
+                "industryStd": "PCI.DSS",
+                "displayName": "PCI DSS",
+                "desc": "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle branded credit cards from the major card providers. The standard was created to increase controls around cardholder data to reduce credit card fraud."
+            },
+            {
+                "industryStd": "EU.GDPR",
+                "displayName": "GDPR",
+                "desc": "EU data privacy and protection regulation covering collection, storage, processing, and transfer of personal data with entities that work with European Clients."
+            },
+            {
+                "industryStd": "HIPAA",
+                "displayName": "HIPAA",
+                "desc": "HIPAA / HITECH are US regulations for protection of healthcare information."
+            },
+            {
+                "industryStd": "ISO27001",
+                "displayName": "ISO 27001",
+                "desc": "ISO 27001 is a widely used international standard that organizations use to manage the security of their information assets."
+            },
+            {
+                "industryStd": "1TAC",
+                "displayName": "1 TAC",
+                "desc": "1TAC deals with rules set from state agencies in Texas, separated into several titles for each agency dealt within the framework."
+            },
+            {
+                "industryStd": "201CMR17",
+                "displayName": "201 CMR.17",
+                "desc": "Massachusetts state regulation establishing minimum standards to be met in connection with the safeguarding of residents\u2019 personal information."
+            },
+            {
+                "industryStd": "23NYCRR",
+                "displayName": "23 NYCRR",
+                "desc": "New York state regulation that establishes cybersecurity requirements for financial services companies."
+            },
+            {
+                "industryStd": "NRS603A",
+                "displayName": "NRS 603A",
+                "desc": "Nevada state regulation to protect personal information of residents."
+            },
+            {
+                "industryStd": "CSA.CCM",
+                "displayName": "CSA CCM",
+                "desc": "Cloud Control Matrix is a cloud focused control framework that provides guidance for security and privacy."
+            },
+            {
+                "industryStd": "SCIDSA",
+                "displayName": "SCIDSA",
+                "desc": "South Carolina state regulation that protects insurance data."
+            },
+            {
+                "industryStd": "NIST.CSF",
+                "displayName": "NIST CSF",
+                "desc": "One of the most widely used security and privacy control frameworks published by NIST (US)"
+            },
+            {
+                "industryStd": "FCA",
+                "displayName": "FCA",
+                "desc": "Financial Conduct Authority\u2019s Handbook of rules and guidance"
+            },
+            {
+                "industryStd": "AWS.FTR",
+                "displayName": "AWS FTR",
+                "desc": "The AWS Foundational Technical Review (FTR) is an AWS requirement to become an AWS partner.  It is broad framework that ensures that you are following security best practices within AWS."
+            },
+            {
+                "industryStd": "Azure_Benchmarks",
+                "displayName": "Azure Benchmarks",
+                "desc": "The Azure Security Benchmark focuses on cloud-centric control areas"
+            },
+            {
+                "industryStd": "Soc_2",
+                "displayName": "SOC 2",
+                "desc": "SOC 2 assists in measuring your internal policies against industry standards for securing and protecting data."
+            },
+            {
+                "industryStd": "NIST.800-53.R5",
+                "displayName": "NIST 800-53 R5",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "Mitre_att&ck",
+                "displayName": "MITRE ATT&CK",
+                "desc": "MITRE ATT&CK s a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations."
+            },
+            {
+                "industryStd": "Cis_Controls_v8",
+                "displayName": "CIS Controls v8",
+                "desc": "CIS Controls v8 is a framework that provides security controls that organizations should follow to detect & mitigate cyber-attacks."
+            }
+        ],
+        "violations": [
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "daemonSet[0].Spec.Template.Spec.AutomountServiceAccountToken",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable automatic volume mount of Service Account token in Containers",
+                "configGap": "Disable automatic volume mount of Service Account token in Containers",
+                "configImpact": "",
+                "configFix": "Set daemonSet[0].Spec.Template.Spec.AutomountServiceAccountToken to False to prevent automatic creation of Service Account token volume mount. By default, every pod is created with a default Service Account. API credentials required by this Service Account are mounted in the containers by default, allowing pods to communicate with the Kubernetes API server. Disabling daemonSet[0].Spec.Template.Spec.AutomountServiceAccountToken would prevent accidental access to the Service Account's API credentials",
+                "severity": "Moderate",
+                "oak9Severity": "Moderate",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "daemonSet[0].Spec.Template.Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation",
+                "attributeValue": "True",
+                "isVariable": false,
+                "oak9RecommendedValue": "False",
+                "errorMessage": "Disable privilege escalation in Containers",
+                "configGap": "Disable privilege escalation in Containers",
+                "configImpact": "",
+                "configFix": "Set daemonSet[0].Spec.Template.Spec.Containers[0].SecurityContext.AllowPrivilegeEscalation to False to prevent processes running in Containers from gaining more privileges than necessary",
+                "severity": "Critical",
+                "oak9Severity": "Critical",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.CM.1",
+                "requirementName": "Hardening",
+                "attributeKey": "daemonSet[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem",
+                "attributeValue": "False",
+                "isVariable": false,
+                "oak9RecommendedValue": "True",
+                "errorMessage": "Enable Read-Only file system in Containers",
+                "configGap": "Enable Read-Only file system in Containers",
+                "configImpact": "",
+                "configFix": "Set daemonSet[0].Spec.Template.Spec.Containers[0].SecurityContext.ReadOnlyRootFilesystem to True to mount the Container's root file system as read-only",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            }
+        ]
+    },
+    {
+        "requirementId": "Oak9.CR.BR.1",
+        "requirementName": "High Availability",
+        "source": "Kubernetes",
+        "resourceName": "sac-k8-daemon-set",
+        "resourceId": "Kubernetes_Namespaced-bbada15c-6d90-648c-f36d-0b1cc3e22e98",
+        "resourceType": "Kubernetes_Namespaced",
+        "oak9Guidance": "Design a highly available architecture that ensures the availability of essential business functions in accordance with organizational policies and standards",
+        "reqGap": "sac-k8-daemon-set has not been designed for high availability",
+        "reqImpact": "Unexpected resource failure could lead to unanticipated downtime",
+        "mappedIndustryFrameworks": [
+            {
+                "industryStd": "NIST.800-53.R4",
+                "displayName": "NIST 800-53 R4",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "HITRUST.BUID",
+                "displayName": "HITRUST",
+                "desc": "HITRUST CSF is a healthcare focused security and privacy framework that rationalizes relevant regulations and standards into a single overarching framework."
+            },
+            {
+                "industryStd": "PCI.DSS",
+                "displayName": "PCI DSS",
+                "desc": "The Payment Card Industry Data Security Standard is an information security standard for organizations that handle branded credit cards from the major card providers. The standard was created to increase controls around cardholder data to reduce credit card fraud."
+            },
+            {
+                "industryStd": "EU.GDPR",
+                "displayName": "GDPR",
+                "desc": "EU data privacy and protection regulation covering collection, storage, processing, and transfer of personal data with entities that work with European Clients."
+            },
+            {
+                "industryStd": "HIPAA",
+                "displayName": "HIPAA",
+                "desc": "HIPAA / HITECH are US regulations for protection of healthcare information."
+            },
+            {
+                "industryStd": "ISO27001",
+                "displayName": "ISO 27001",
+                "desc": "ISO 27001 is a widely used international standard that organizations use to manage the security of their information assets."
+            },
+            {
+                "industryStd": "1TAC",
+                "displayName": "1 TAC",
+                "desc": "1TAC deals with rules set from state agencies in Texas, separated into several titles for each agency dealt within the framework."
+            },
+            {
+                "industryStd": "201CMR17",
+                "displayName": "201 CMR.17",
+                "desc": "Massachusetts state regulation establishing minimum standards to be met in connection with the safeguarding of residents\u2019 personal information."
+            },
+            {
+                "industryStd": "23NYCRR",
+                "displayName": "23 NYCRR",
+                "desc": "New York state regulation that establishes cybersecurity requirements for financial services companies."
+            },
+            {
+                "industryStd": "NRS603A",
+                "displayName": "NRS 603A",
+                "desc": "Nevada state regulation to protect personal information of residents."
+            },
+            {
+                "industryStd": "CSA.CCM",
+                "displayName": "CSA CCM",
+                "desc": "Cloud Control Matrix is a cloud focused control framework that provides guidance for security and privacy."
+            },
+            {
+                "industryStd": "SCIDSA",
+                "displayName": "SCIDSA",
+                "desc": "South Carolina state regulation that protects insurance data."
+            },
+            {
+                "industryStd": "NIST.CSF",
+                "displayName": "NIST CSF",
+                "desc": "One of the most widely used security and privacy control frameworks published by NIST (US)"
+            },
+            {
+                "industryStd": "FCA",
+                "displayName": "FCA",
+                "desc": "Financial Conduct Authority\u2019s Handbook of rules and guidance"
+            },
+            {
+                "industryStd": "AWS.FTR",
+                "displayName": "AWS FTR",
+                "desc": "The AWS Foundational Technical Review (FTR) is an AWS requirement to become an AWS partner.  It is broad framework that ensures that you are following security best practices within AWS."
+            },
+            {
+                "industryStd": "Azure_Benchmarks",
+                "displayName": "Azure Benchmarks",
+                "desc": "The Azure Security Benchmark focuses on cloud-centric control areas"
+            },
+            {
+                "industryStd": "Soc_2",
+                "displayName": "SOC 2",
+                "desc": "SOC 2 assists in measuring your internal policies against industry standards for securing and protecting data."
+            },
+            {
+                "industryStd": "NIST.800-53.R5",
+                "displayName": "NIST 800-53 R5",
+                "desc": "NIST 800-53 is one of the most widely used security and privacy control frameworks published by NIST for the US Govt. and Critical Infrastructure, but applicable broadly across industries."
+            },
+            {
+                "industryStd": "Mitre_att&ck",
+                "displayName": "MITRE ATT&CK",
+                "desc": "MITRE ATT&CK s a globally-accessible knowledge base of adversary tactics and techniques based on real-world observations."
+            },
+            {
+                "industryStd": "Cis_Controls_v8",
+                "displayName": "CIS Controls v8",
+                "desc": "CIS Controls v8 is a framework that provides security controls that organizations should follow to detect & mitigate cyber-attacks."
+            }
+        ],
+        "violations": [
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "horizontalPodAutoscaler",
+                "attributeValue": "[]",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Horizontal Auto Scaling for Kubernetes Pods",
+                "configGap": "Define Horizontal Auto Scaling for Kubernetes Pods",
+                "configImpact": "",
+                "configFix": "Ensure that horizontalPodAutoscaler is defined to automatically deploy new pods based on demand",
+                "severity": "High",
+                "oak9Severity": "High",
+                "documentation": "",
+                "childViolations": []
+            },
+            {
+                "requirementId": "Oak9.CR.BR.1",
+                "requirementName": "High Availability",
+                "attributeKey": "daemonSet[0].Spec.Template.Spec.Containers[0].LivenessProbe",
+                "attributeValue": "",
+                "isVariable": false,
+                "oak9RecommendedValue": "",
+                "errorMessage": "Define Liveness Probes for Containers",
+                "configGap": "Define Liveness Probes for Containers",
+                "configImpact": "",
+                "configFix": "Ensure that daemonSet[0].Spec.Template.Spec.Containers[0].LivenessProbe is defined to restart the Containers during unexpected failures",
+                "severity": "Low",
+                "oak9Severity": "Low",
+                "documentation": "",
+                "childViolations": []
+            }
+        ]
+    }
+]
