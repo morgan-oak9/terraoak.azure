@@ -69,7 +69,7 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
 
   ssl_policy {
     # SaC Testing - Severity: Critical - Set min_protocol_version != tlsv1.2
-    min_protocol_version = "TLSv1_1"
+    min_protocol_version = "tlsv1_2"
     # SaC Testing - Severity: Critical - Set disabled_protocols != [TLSv1_0, TLSv1_1]
     #disabled_protocols = ["TLSv1_0", "TLSv1_1"]   # Not allowed when policy type defined
   }
