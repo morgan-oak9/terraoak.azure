@@ -6,8 +6,8 @@ resource "azurerm_resource_group" "app_gateway_resource_group" {
 # ---------------------------------------------------------------------
 # Application Gateway
 # ---------------------------------------------------------------------
-resource "azurerm_application_gateway" "sac_application_gateway" {
-  name                = "sac-application-gateway"
+resource "azurerm_application_gateway" "sac_application_gateway_waf" {
+  name                = "sac-application-gateway-wafv2"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
   location            = azurerm_resource_group.app_gateway_resource_group.location
   
