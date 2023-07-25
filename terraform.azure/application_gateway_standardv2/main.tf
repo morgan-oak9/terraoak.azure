@@ -49,7 +49,7 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
     cookie_based_affinity = "Disabled"
     port                  = 63
      # SaC Testing - Severity: Critical - Set protocol != Https
-    protocol              = "Http"
+    protocol              = "Https"
     request_timeout       = 20000
     
     connection_draining {
