@@ -22,7 +22,7 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
     name                  = "backend-http-settings"
     cookie_based_affinity = "Disabled"
     port                  = 63
-    protocol              = "http"
+    protocol              = "Https"
     request_timeout       = 0
     
     connection_draining {
