@@ -29,6 +29,7 @@ resource "azurerm_linux_web_app" "sac_linux_web_app" {
 }
 
 resource "azurerm_windows_web_app" "sac_windows_web_app" {
+  # oak9: Restrict access to only trusted sources
   name                = "sac-windows-web-app"
   resource_group_name = azurerm_resource_group.sac_web_resource_group.name
   location            = azurerm_resource_group.sac_web_resource_group.location
