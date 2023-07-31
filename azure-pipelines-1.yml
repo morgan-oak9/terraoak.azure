@@ -1,4 +1,11 @@
 # Starter pipeline
+- task: oak9 Analysis Task@2
+  inputs:
+    serviceEndpoint: 'prod - oak9 Integration Testing'
+    projectName: 'proj-oak9appsec-10'
+    environmentName: 'env-oak9appsec-c6YYlIVP'
+    qualityGate: 'Critical'
+    pollingTimeoutSec: '300'
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
