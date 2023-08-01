@@ -26,3 +26,4 @@ steps:
     environmentName: 'env-autotesting-3GUR96Zc'
     qualityGate: 'None'
     pollingTimeoutSec: '300'
+    oak9APIEndpoint: https://devapi.oak9.cloud
