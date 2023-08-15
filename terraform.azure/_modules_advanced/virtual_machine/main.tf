@@ -134,7 +134,7 @@ resource "azurerm_key_vault_access_policy" "disk" {
   key_vault_id = azurerm_key_vault.sac_vm_keyvault.id
   tenant_id = azurerm_disk_encryption_set.sac_vm_disk_encryption_set.identity.0.tenant_id
   object_id = azurerm_disk_encryption_set.sac_vm_disk_encryption_set.identity.0.principal_id
-  key_permissions = [
+  key_permissions = [ # oak9: key_permissions should be set to any of ["Get"]
     "Create",
     "Delete",
     "Get",
