@@ -25,8 +25,8 @@ resource "azurerm_redis_cache" "sac_redis_cache" {
   capacity                  = 1
   family                    = "P"
   sku_name                  = "Premium"
-  enable_non_ssl_port       = true
-  minimum_tls_version       = "1.0"
+  enable_non_ssl_port       = false
+  minimum_tls_version       = 1.2
   public_network_access_enabled = true
   // Bug in Terraform (https://github.com/hashicorp/terraform-provider-azurerm/issues/11430)
   redis_configuration {

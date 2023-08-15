@@ -12,7 +12,7 @@ resource "azurerm_healthcare_service" "sac_healthcare_apis" {
   cosmosdb_throughput = "2000"
   cors_configuration {
     allowed_origins    = ["PUT", "*"]
-    allowed_methods    = ["DELETE", "PUT"]
+    allowed_methods    = ["DELETE", "PUT"] # oak9: cors_configuration.allowed_methods should be set to any of get, put, post
     max_age_in_seconds = "500"
     allow_credentials  = "true"
   }
