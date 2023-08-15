@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "app_gateway_resource_group" {
 }
 
 resource "azurerm_application_gateway" "sac_application_gateway" {
-  name                = "sac-application-gateway"
+  name                = "AppGwSslPolicy20170401S"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
   location            = azurerm_resource_group.app_gateway_resource_group.location
   sku {
