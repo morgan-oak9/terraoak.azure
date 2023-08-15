@@ -5,7 +5,8 @@ resource "azurerm_resource_group" "app_gateway_resource_group" {
 }
 
 resource "azurerm_application_gateway" "sac_application_gateway" {
-  name                = "sac-application-gateway"
+  # oak9: Use the latest SSL policies
+  name                = "AppGwSslPolicy20170401S"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
   location            = azurerm_resource_group.app_gateway_resource_group.location
   sku {
@@ -20,7 +21,7 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
     name                  = "backend-http-settings"
     cookie_based_affinity = "Disabled"
     port                  = 63
-    protocol              = "http"
+    protocol              = "Https"
     request_timeout       = 0
     connection_draining {
       enabled = false
@@ -31,7 +32,7 @@ resource "azurerm_application_gateway" "sac_application_gateway" {
     name                           = "http-listener-1"
     frontend_ip_configuration_name = "ip_config_1"
     frontend_port_name             = "front_end_port_1"
-    protocol                       = "HTTP"
+    protocol                       = "Https"
     port                           = 443
   }
   ssl_policy {
