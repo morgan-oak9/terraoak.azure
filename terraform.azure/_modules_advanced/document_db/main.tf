@@ -25,6 +25,7 @@ resource "azurerm_cosmosdb_account" "sac_cosmosdb_account" {
   cors_rule {
     allowed_methods = ["GET", "DELETE"]
     allowed_origins = ["*"]
+    # oak9: CORS configuration should only allow requests from trusted origins
     allowed_headers = ["*"]
     exposed_headers = ["*"]
     max_age_in_seconds = 100
