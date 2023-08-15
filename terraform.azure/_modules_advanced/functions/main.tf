@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "sac_function_resource_group" {
 }
 
 resource "azurerm_linux_function_app" "sac_linux_function_app" {
+  # oak9: Restrict access to only trusted sources
   name                = "sac-linux-function-app"
   resource_group_name = azurerm_resource_group.sac_function_resource_group.name
   location            = azurerm_resource_group.sac_function_resource_group.location
