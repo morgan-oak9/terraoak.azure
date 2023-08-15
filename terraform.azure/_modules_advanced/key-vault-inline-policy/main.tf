@@ -16,13 +16,13 @@ resource "azurerm_key_vault" "sac_key_vault" {
   public_network_access_enabled = true
   network_acls {
     bypass          = "AzureServices"
-    default_action  =  "Allow"
+    default_action  = "Deny"
   }
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = ""
-    key_permissions = ["Delete", "Purge","Create", "Get", "Update"]
-    secret_permissions = ["Delete", "Purge", "Get", "Set", "List"]
+    key_permissions = ["Delete", "Purge","Create", "Get", "Update"] # oak9: access_policy.key_permissions should be set to any of ["Get"]
+    secret_permissions = ["Delete", "Purge", "Get", "Set", "List"] # oak9: access_policy.secret_permissions should be set to any of ["Get"]
     certificate_permissions = ["Delete", "DeleteIssuers", "Purge", "Create", "Get", "Update"]
   }
 }

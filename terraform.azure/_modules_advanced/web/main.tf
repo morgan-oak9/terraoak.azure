@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "sac_web_resource_group" {
 }
 
 resource "azurerm_linux_web_app" "sac_linux_web_app" {
+  # oak9: Restrict access to only trusted sources
   name                = "sac-linux-web-app"
   resource_group_name = azurerm_resource_group.sac_web_resource_group.name
   location            = azurerm_resource_group.sac_web_resource_group.location
@@ -14,6 +15,7 @@ resource "azurerm_linux_web_app" "sac_linux_web_app" {
   site_config {
     cors {
       allowed_origins = ["*"]
+    # oak9: CORS configuration should only allow requests from trusted origins
     }
     minimum_tls_version = "1.0"
     remote_debugging_enabled = true
@@ -25,6 +27,7 @@ resource "azurerm_linux_web_app" "sac_linux_web_app" {
 }
 
 resource "azurerm_windows_web_app" "sac_windows_web_app" {
+  # oak9: Restrict access to only trusted sources
   name                = "sac-windows-web-app"
   resource_group_name = azurerm_resource_group.sac_web_resource_group.name
   location            = azurerm_resource_group.sac_web_resource_group.location
@@ -34,6 +37,7 @@ resource "azurerm_windows_web_app" "sac_windows_web_app" {
   site_config {
     cors {
       allowed_origins = ["*"]
+    # oak9: CORS configuration should only allow requests from trusted origins
     }
     minimum_tls_version = "1.0"
     remote_debugging_enabled = true
