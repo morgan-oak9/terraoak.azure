@@ -40,7 +40,7 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
     protocol                       = "Http"
   }
   ssl_policy {
-    min_protocol_version = "TLSv1_1"
+    min_protocol_version = "tlsv1_2"
   }
   frontend_port {
     name = "redirect-port"
