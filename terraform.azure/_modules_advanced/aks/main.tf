@@ -16,7 +16,7 @@ resource "azurerm_kubernetes_cluster" "sac_aks_cluster" {
     enable_auto_scaling = false
     zones = []
   }
-  local_account_disabled = false
+  local_account_disabled = true
   private_cluster_enabled = false
   identity {
     type = "SystemAssigned"
