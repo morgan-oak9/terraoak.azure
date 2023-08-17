@@ -37,7 +37,7 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
     name                           = "http-listener-1"
     frontend_ip_configuration_name = "frontend-ip-config"
     frontend_port_name             = "redirect-port"
-    protocol                       = "Http"
+    protocol                       = "Https"
   }
   ssl_policy {
     min_protocol_version = "tlsv1_2"
