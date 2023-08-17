@@ -16,7 +16,7 @@ resource "azurerm_key_vault" "sac_key_vault" {
   public_network_access_enabled = true
   network_acls {
     bypass          = "AzureServices"
-    default_action  =  "Allow"
+    default_action  = "Deny"
   }
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
