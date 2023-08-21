@@ -17,7 +17,7 @@ resource "azurerm_cdn_endpoint" "sac_cdn_endpoint" {
   location            = azurerm_resource_group.cdn_resource_group.location
   resource_group_name = azurerm_resource_group.cdn_resource_group.name
   is_http_allowed = true
-  is_https_allowed = false
+  is_https_allowed = true
   origin {
     name      = "sac-test-origin"
     host_name = "testingdomain.com"

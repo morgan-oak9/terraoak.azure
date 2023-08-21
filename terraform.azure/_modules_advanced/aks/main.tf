@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "sac_aks_resource_group" {
 }
 
 resource "azurerm_kubernetes_cluster" "sac_aks_cluster" {
+  # oak9: Allow Control Plane access to only trusted IPs
   name                = "sac-testing-aks-cluster"
   location            = azurerm_resource_group.sac_aks_resource_group.location
   resource_group_name = azurerm_resource_group.sac_aks_resource_group.name
@@ -16,7 +17,7 @@ resource "azurerm_kubernetes_cluster" "sac_aks_cluster" {
     enable_auto_scaling = false
     zones = []
   }
-  local_account_disabled = false
+  local_account_disabled = true
   private_cluster_enabled = false
   identity {
     type = "SystemAssigned"
@@ -35,7 +36,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "sac_aks_node_pool" {
   name                  = "sacakspool"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.sac_aks_cluster.id
   vm_size               = "Standard_DS2_v2"
-  enable_node_public_ip = true
+  enable_node_public_ip = false
   enable_auto_scaling = false
   max_count = 100
   min_count = 0

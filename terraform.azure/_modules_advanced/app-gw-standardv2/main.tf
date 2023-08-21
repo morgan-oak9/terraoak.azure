@@ -1,5 +1,6 @@
 
 resource "azurerm_application_gateway" "sac_application_gateway_standardv2_predefined" {
+  # oak9: Configure TLS policy
   name                = "sac-application-gateway"
   resource_group_name = azurerm_resource_group.app_gateway_resource_group.name
   location            = azurerm_resource_group.app_gateway_resource_group.location
@@ -26,7 +27,7 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
     name                  = "backend-http-settings"
     cookie_based_affinity = "Disabled"
     port                  = 63
-    protocol              = "Http"
+    protocol              = "Https"
     request_timeout       = 20000
     connection_draining {
       enabled = false
@@ -37,10 +38,10 @@ resource "azurerm_application_gateway" "sac_application_gateway_standardv2_prede
     name                           = "http-listener-1"
     frontend_ip_configuration_name = "frontend-ip-config"
     frontend_port_name             = "redirect-port"
-    protocol                       = "Http"
+    protocol                       = "Https"
   }
   ssl_policy {
-    min_protocol_version = "TLSv1_1"
+    min_protocol_version = "tlsv1_2"
   }
   frontend_port {
     name = "redirect-port"
