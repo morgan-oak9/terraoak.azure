@@ -5,6 +5,7 @@ resource "azurerm_resource_group" "sac_aks_resource_group" {
 }
 
 resource "azurerm_kubernetes_cluster" "sac_aks_cluster" {
+  # oak9: Allow Control Plane access to only trusted IPs
   name                = "sac-testing-aks-cluster"
   location            = azurerm_resource_group.sac_aks_resource_group.location
   resource_group_name = azurerm_resource_group.sac_aks_resource_group.name
